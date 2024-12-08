@@ -1,0 +1,137 @@
+connectors:
+  battery:
+    type: 18650
+    pinout: [POS, NEG]
+    
+  charger:
+    type: TP4056
+    pinout: [VIN+, VIN-, VBAT+, VBAT-, LOAD+, LOAD-]
+    
+  mcu:
+    type: STM32L0
+    pinout: [VDD, GND, SCL, SDA, MOSI, MISO, SCK, NSS_LORA, NSS_GPS, LED_CTRL, BTN_IN, V12_SENSE1, V12_SENSE2]
+    
+  accel:
+    type: MPU6050
+    pinout: [VDD, GND, SCL, SDA, INT]
+    
+  lora:
+    type: RFM95W
+    pinout: [VDD, GND, MOSI, MISO, SCK, NSS, DIO0]
+    
+  gps:
+    type: GPS_MODULE
+    pinout: [VDD, GND, MOSI, MISO, SCK, NSS]
+    
+  switch:
+    type: SPST
+    pinout: [1, 2]
+    
+  v12_contact:
+    type: Input
+    pinout: [12V, GND]
+    
+  v12_coffre:
+    type: Input
+    pinout: [12V, GND]
+    
+  led_coffre:
+    type: LED_W5W
+    pinout: [A, K]
+    
+  led_torche:
+    type: LED_HP
+    pinout: [A, K]
+
+cables:
+  power_main:
+    gauge: 0.5
+    length: 10
+    color_code: RB
+    connections:
+      - v12_contact: [12V, GND]
+      - charger: [VIN+, VIN-]
+        
+  power_coffre:
+    gauge: 0.5
+    length: 10
+    color_code: RB
+    connections:
+      - v12_coffre: [12V, GND]
+      - led_coffre: [A, K]
+        
+  battery_charger:
+    gauge: 0.5
+    length: 5
+    color_code: RB
+    connections:
+      - battery: [POS, NEG]
+      - charger: [VBAT+, VBAT-]
+        
+  charger_load:
+    gauge: 0.5
+    length: 5
+    color_code: RB
+    connections:
+      - charger: [LOAD+, LOAD-]
+      - mcu: [VDD, GND]
+        
+  i2c_bus:
+    gauge: 0.25
+    length: 7
+    color_code: GYBU
+    shield: true
+    connections:
+      - mcu: [VDD, GND, SCL, SDA]
+      - accel: [VDD, GND, SCL, SDA]
+        
+  spi_lora:
+    gauge: 0.25
+    length: 5
+    color_code: GYBUBN
+    shield: true
+    connections:
+      - mcu: [VDD, GND, MOSI, MISO, SCK, NSS_LORA]
+      - lora: [VDD, GND, MOSI, MISO, SCK, NSS]
+        
+  spi_gps:
+    gauge: 0.25
+    length: 5
+    color_code: GYBUBN
+    shield: true
+    connections:
+      - mcu: [VDD, GND, MOSI, MISO, SCK, NSS_GPS]
+      - gps: [VDD, GND, MOSI, MISO, SCK, NSS]
+        
+  button:
+    gauge: 0.25
+    length: 3
+    color_code: RB
+    connections:
+      - switch: [1, 2]
+      - mcu: [BTN_IN, GND]
+        
+  led_control:
+    gauge: 0.5
+    length: 4
+    color_code: RB
+    connections:
+      - mcu: [LED_CTRL, GND]
+      - led_torche: [A, K]
+        
+  accel_int:
+    gauge: 0.25
+    length: 4
+    color_code: W
+    connections:
+      - accel: [INT]
+      - mcu: [V12_SENSE1]
+        
+  v12_sense:
+    gauge: 0.25
+    length: 4
+    color_code: BR
+    connections:
+      - mcu: [V12_SENSE1, V12_SENSE2]
+      - v12_contact: [12V]
+      - v12_coffre: [12V]
