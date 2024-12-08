@@ -1,0 +1,48 @@
+flowchart TD
+    subgraph ALIMENTATION
+        BAT[Batterie Li-ion 18650]
+        CH[Chargeur TP4056]
+        DC[Convertisseur DC-DC]
+        D12V1[+12V après contact]
+        D12V2[+12V coffre ouvert]
+        
+        D12V1 --> CH
+        CH --> BAT
+        BAT --> DC
+        DC --> SYSTEM
+    end
+
+    subgraph DETECTION
+        ACC[Accéléromètre MPU6050/LIS3DH]
+        ACC --> |Interruption| MCU
+        D12V2 --> |Détection coffre| MCU
+        D12V1 --> |Détection contact| MCU
+    end
+
+    subgraph ECLAIRAGE
+        LED1[LED Coffre]
+        LED2[LED Portable]
+        BTN[Bouton Poussoir]
+        
+        D12V2 --> LED1
+        DC --> LED2
+        BTN --> MCU
+        MCU --> |Contrôle| LED2
+    end
+
+    subgraph COMMUNICATION
+        MCU[Microcontrôleur\nSTM32L0/SAMD21]
+        GPS[Module GPS]
+        LORA[Module LoRa RFM95W]
+        
+        GPS --> MCU
+        MCU --> LORA
+    end
+
+    subgraph ETATS["ÉTATS SYSTÈME"]
+        direction TB
+        E1[Voiture en mouvement\nTransmission GPS 1-2min]
+        E2[Voiture statique\nTransmission GPS 15-30min]
+        E3[Mode batterie\nTransmission sur événements]
+        E4[Mode lampe\nÉconomie d'énergie]
+    end
