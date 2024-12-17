@@ -1,9 +1,12 @@
 # Projet de Modernisation de la Lampe Nomade Citroën
+![](assets/index.33.jpg)
 
 ## Contexte et Objectif
 Modernisation de la lampe nomade (réf. 6362Z0) du coffre des Citroën C5 Tourer. Cette lampe d'origine combine :
 - Un éclairage fixe du coffre
 - Une fonction lampe de poche amovible
+- 
+![](assets/pack-interieur-led-citroen-c5-2-tourer.jpg)
 
 Le projet vise à conserver le boîtier d'origine tout en modernisant l'électronique pour améliorer les performances et ajouter des fonctionnalités connectées.
 
