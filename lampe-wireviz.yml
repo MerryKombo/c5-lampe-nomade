@@ -100,6 +100,13 @@ cables:
     colors: [RD, BK]
     shield: false
 
+  charger_to_mcu:
+    wirecount: 2
+    gauge: 0.5  # Using 0.5mm² for power distribution
+    length: 50
+    colors: [ RD, BK ]
+    shield: false
+
 connections:
   - # power_main
     - V12_IN: [12V, GND]
@@ -140,3 +147,8 @@ connections:
     - MCU: [LED, GND]
     - led_control: ["1", "2"]
     - LED_TORCH: [A, K]
+
+  - # Battery to MCU power connection
+    - CHARGER: [LOAD+, LOAD-]
+    - charger_to_mcu: ["1", "2"]
+    - MCU: [VDD, GND]
