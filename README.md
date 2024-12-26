@@ -5,12 +5,21 @@
 Modernisation de la lampe nomade (réf. 6362Z0) du coffre des Citroën C5 Tourer. Cette lampe d'origine combine :
 - Un éclairage fixe du coffre
 - Une fonction lampe de poche amovible
-- 
+
 ![](assets/pack-interieur-led-citroen-c5-2-tourer.jpg)
 
 Le projet vise à conserver le boîtier d'origine tout en modernisant l'électronique pour améliorer les performances et ajouter des fonctionnalités connectées.
 
 ## Fonctionnalités
+
+### Fonctionnalités actuelles
+
+La lampe actuelle utilise une ampoule W5W halogène avec une lentille comme sur les autres porte-lampes de la voiture.
+L'ampoule en mode lampe de poche est une BA9S 4V, vraiment très faible.
+La lampe ne contient aucun circuit électronique, juste quelques pistes pour apporter le courant de charge aux accumulateurs NiMH et le courant pour alimenter la lampe de coffre quand le hayon s'ouvre.
+Les accumulateurs sont chargés grâce à un circuit simpliste, une diode et trois résistances.
+
+![](assets/TorcheC5.jpg.6f385c2518659b8670c002e0316cd914.jpg)
 
 ### Fonctionnalités d'origine améliorées
 - Éclairage de coffre LED (déjà implémenté avec W5W LED)
