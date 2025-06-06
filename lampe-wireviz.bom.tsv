@@ -1,15 +1,18 @@
 Id	Description	Qty	Unit	Designators
 1	Cable, 2 x 0.25 mm²	30	m	button
-2	Cable, 2 x 0.5 mm²	340	m	battery_link, charger_to_mcu, led_control, power_coffre, power_main
-3	Cable, 4 x 0.25 mm² shielded	70	m	i2c_bus
-4	Cable, 6 x 0.25 mm² shielded	100	m	spi_gps, spi_lora
-5	Connector, 18650, 2 pins	1		BAT
-6	Connector, GPS_MODULE, 6 pins	1		GPS
-7	Connector, Input, 2 pins	2		V12_COFFRE, V12_IN
-8	Connector, LED_HP, 2 pins	1		LED_TORCH
-9	Connector, LED_W5W, 2 pins	1		LED_COFFRE
-10	Connector, MPU6050, 5 pins	1		ACC
-11	Connector, RFM95W, 6 pins	1		LORA
-12	Connector, SPST, 2 pins	1		SW
-13	Connector, STM32L0, 13 pins	1		MCU
-14	Connector, TP4056, 6 pins	1		CHARGER
+2	Cable, 2 x 0.5 mm²	340	m	battery_link, charger_to_mcu, led_control, power_coffre_in, power_coffre_out, power_main
+3	Cable, 3 x 0.25 mm² shielded	30	m	light_sense
+4	Cable, 4 x 0.25 mm² shielded	70	m	i2c_bus
+5	Cable, 6 x 0.25 mm² shielded	100	m	spi_gps, spi_lora
+6	Connector, 18650, 2 pins	1		BAT
+7	Connector, Current_Sensor, 4 pins	1		INA219
+8	Connector, GPS_MODULE, 6 pins	1		GPS
+9	Connector, Input, 2 pins	2		V12_COFFRE, V12_IN
+10	Connector, LED_HP, 2 pins	1		LED_TORCH
+11	Connector, LED_W5W, 2 pins	1		LED_COFFRE
+12	Connector, Light_Sensor, 3 pins	1		TEMT6000
+13	Connector, MPU6050, 5 pins	1		ACC
+14	Connector, RFM95W, 6 pins	1		LORA
+15	Connector, SPST, 2 pins	1		SW
+16	Connector, STM32L0, 13 pins	1		MCU
+17	Connector, TP4056, 6 pins	1		CHARGER
