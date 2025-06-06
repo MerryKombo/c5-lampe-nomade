@@ -43,6 +43,16 @@ connectors:
     type: LED_HP
     pinlabels: [A, K]
 
+  TEMT6000:
+    type: Light_Sensor
+    pinlabels: [VDD, GND, AO]
+    notes: TEMT6000 breakout board - Place in trunk near LED_W5W
+
+  INA219:
+    type: Current_Sensor
+    pinlabels: [VDD, GND, SCL, SDA]
+    notes: For monitoring LED_W5W current - Place in-line with LED power
+
 cables:
   power_main:
     wirecount: 2
@@ -107,16 +117,34 @@ cables:
     colors: [ RD, BK ]
     shield: false
 
+  light_sense:
+    wirecount: 3
+    gauge: 0.25
+    length: 30
+    colors: [ RD, BK, YE ]
+    shield: true
+    notes: Keep away from power cables
+
+  # Modify power_coffre to route through INA219
+  power_coffre_in:
+    wirecount: 2
+    gauge: 0.5
+    length: 10
+    colors: [ RD, BK ]
+    shield: false
+
+  power_coffre_out:
+    wirecount: 2
+    gauge: 0.5
+    length: 90
+    colors: [ RD, BK ]
+    shield: false
+
 connections:
   - # power_main
     - V12_IN: [12V, GND]
     - power_main: ["1", "2"]
     - CHARGER: [VIN+, VIN-]
-
-  - # power_coffre
-    - V12_COFFRE: [12V, GND]
-    - power_coffre: ["1", "2"]
-    - LED_COFFRE: [A, K]
 
   - # battery_link
     - BAT: [POS, NEG]
@@ -152,3 +180,24 @@ connections:
     - CHARGER: [LOAD+, LOAD-]
     - charger_to_mcu: ["1", "2"]
     - MCU: [VDD, GND]
+
+  # Modified coffre power routing
+  - # power input to INA219
+    - V12_COFFRE: [12V, GND]
+    - power_coffre_in: ["1", "2"]
+    - INA219: [VDD, GND]
+
+  - # INA219 to LED
+    - INA219: [VDD, GND]
+    - power_coffre_out: ["1", "2"]
+    - LED_COFFRE: [A, K]
+
+  - # Light sensor connection
+    - MCU: [VDD, GND, V12_1]  # V12_1 as analog input
+    - light_sense: ["1-3"]
+    - TEMT6000: [VDD, GND, AO]
+
+  - # INA219 I2C connection (sharing existing bus)
+    - MCU: [SCL, SDA]
+    - i2c_bus: ["3", "4"]  # Using existing I2C bus
+    - INA219: [SCL, SDA]
