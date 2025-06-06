@@ -1,6 +1,6 @@
 Id	Description	Qty	Unit	Designators
 1	Cable, 2 x 0.25 mm²	30	m	button
-2	Cable, 2 x 0.5 mm²	340	m	battery_link, charger_to_mcu, led_control, power_coffre_in, power_coffre_out, power_main
+2	Cable, 2 x 0.5 mm²	440	m	battery_link, charger_to_mcu, led_control, power_coffre, power_coffre_in, power_coffre_out, power_main
 3	Cable, 3 x 0.25 mm² shielded	30	m	light_sense
 4	Cable, 4 x 0.25 mm² shielded	70	m	i2c_bus
 5	Cable, 6 x 0.25 mm² shielded	100	m	spi_gps, spi_lora
