@@ -32,7 +32,7 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt-get install -y gh
 
-      - name: Create and push PR branch and open PR if changes exist
+      - name: Commit, push, and optionally create PR if changes exist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -40,17 +40,29 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           if git diff --cached --quiet; then
-            echo "No changes detected, skipping PR creation."
+            echo "No changes detected, skipping."
             exit 0
           fi
-          BRANCH_NAME="wireviz-output/update-$(date +%s)"
-          git checkout -b $BRANCH_NAME
-          git commit -m "Auto-generate Wireviz output files"
-          git push origin $BRANCH_NAME
-          BASE_BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
-          gh pr create --title "Auto-generate Wireviz output files" \
-            --body "This PR contains auto-generated Wireviz output files." \
-            --base "$BASE_BRANCH" --head "$BRANCH_NAME"
+
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ] && [ -n "$GITHUB_HEAD_REF" ]; then
+            echo "Detected PR context. Committing and pushing to PR branch."
+            git commit -m "Auto-generate Wireviz output files"
+            git pull --rebase origin $GITHUB_HEAD_REF || true
+            git push origin HEAD:$GITHUB_HEAD_REF
+          # Get the default branch name from the event payload
+          DEFAULT_BRANCH=$(jq -r .repository.default_branch "$GITHUB_EVENT_PATH")
+          elif [ "$GITHUB_REF" = "refs/heads/$DEFAULT_BRANCH" ]; then
+            echo "Detected default branch context ($DEFAULT_BRANCH). Creating PR."
+            BRANCH_NAME="wireviz-output/update-$(date +%s)"
+            git checkout -b $BRANCH_NAME
+            git commit -m "Auto-generate Wireviz output files"
+            git push origin $BRANCH_NAME
+            gh pr create --title "Auto-generate Wireviz output files" \
+              --body "This PR contains auto-generated Wireviz output files." \
+              --base "$DEFAULT_BRANCH" --head "$BRANCH_NAME"
+          else
+            echo "Not a PR or default branch context. Skipping push/PR."
+          fi
 
       - name: Run unit tests
         run: |
