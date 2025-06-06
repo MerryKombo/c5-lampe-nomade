@@ -204,4 +204,5 @@ connections:
 
   - # Direct link between V12_COFFRE and MCU
     - V12_COFFRE: [12V, GND]
+    - power_coffre: ["1", "2"]
     - MCU: [V12_2, GND]
