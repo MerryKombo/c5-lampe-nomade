@@ -1,0 +1,3 @@
+# Sample E2E Test Placeholder
+
+Replace this file with an actual end-to-end test using your preferred E2E framework (e.g., Cypress, Playwright, Selenium).
