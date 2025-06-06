@@ -201,3 +201,8 @@ connections:
     - MCU: [SCL, SDA]
     - i2c_bus: ["3", "4"]  # Using existing I2C bus
     - INA219: [SCL, SDA]
+
+  - # Direct link between V12_COFFRE and MCU
+    - V12_COFFRE: [12V, GND]
+    - power_coffre: ["1", "2"]
+    - MCU: [V12_2, GND]
