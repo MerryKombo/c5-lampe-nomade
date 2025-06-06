@@ -1,0 +1,142 @@
+connectors:
+  BAT:
+    type: 18650
+    pinlabels: [POS, NEG]
+  
+  CHARGER:
+    type: TP4056
+    pinlabels: [VIN+, VIN-, VBAT+, VBAT-, LOAD+, LOAD-]
+  
+  MCU:
+    type: STM32L0
+    pinlabels: [VDD, GND, SCL, SDA, MOSI, MISO, SCK, NSS1, NSS2, LED, BTN, V12_1, V12_2]
+  
+  ACC:
+    type: MPU6050
+    pinlabels: [VDD, GND, SCL, SDA, INT]
+  
+  LORA:
+    type: RFM95W
+    pinlabels: [VDD, GND, MOSI, MISO, SCK, NSS]
+  
+  GPS:
+    type: GPS_MODULE
+    pinlabels: [VDD, GND, MOSI, MISO, SCK, NSS]
+  
+  SW:
+    type: SPST
+    pinlabels: [1, 2]
+  
+  V12_IN:
+    type: Input
+    pinlabels: [12V, GND]
+  
+  V12_COFFRE:
+    type: Input
+    pinlabels: [12V, GND]
+  
+  LED_COFFRE:
+    type: LED_W5W
+    pinlabels: [A, K]
+  
+  LED_TORCH:
+    type: LED_HP
+    pinlabels: [A, K]
+
+cables:
+  power_main:
+    gauge: 0.5
+    length: 100
+    color_code: DIN
+    wirecount: 2
+    shield: false
+    colors: [RED, BK]
+
+  power_coffre:
+    gauge: 0.5
+    length: 100
+    color_code: DIN
+    wirecount: 2
+    shield: false
+    colors: [RED, BK]
+
+  battery_link:
+    gauge: 0.5
+    length: 50
+    color_code: DIN
+    wirecount: 2
+    shield: false
+    colors: [RED, BK]
+
+  i2c_bus:
+    gauge: 0.25
+    length: 70
+    color_code: DIN
+    wirecount: 4
+    shield: true
+    colors: [RED, BK, YE, GN]
+
+  spi_lora:
+    gauge: 0.25
+    length: 50
+    color_code: DIN
+    wirecount: 6
+    shield: true
+    colors: [RED, BK, BU, GN, YE, WH]
+
+  spi_gps:
+    gauge: 0.25
+    length: 50
+    color_code: DIN
+    wirecount: 6
+    shield: true
+    colors: [RED, BK, BU, GN, YE, WH]
+
+  button:
+    gauge: 0.25
+    length: 30
+    color_code: DIN
+    wirecount: 2
+    shield: false
+    colors: [WH, BK]
+
+  led_control:
+    gauge: 0.5
+    length: 40
+    color_code: DIN
+    wirecount: 2
+    shield: false
+    colors: [RED, BK]
+
+connections:
+  - - power_main: [1, 2]
+    - V12_IN: [12V, GND]
+    - CHARGER: [VIN+, VIN-]
+
+  - - power_coffre: [1, 2]
+    - V12_COFFRE: [12V, GND]
+    - LED_COFFRE: [A, K]
+
+  - - battery_link: [1, 2]
+    - BAT: [POS, NEG]
+    - CHARGER: [VBAT+, VBAT-]
+
+  - - i2c_bus: [1, 2, 3, 4]
+    - MCU: [VDD, GND, SCL, SDA]
+    - ACC: [VDD, GND, SCL, SDA]
+
+  - - spi_lora: [1, 2, 3, 4, 5, 6]
+    - MCU: [VDD, GND, MOSI, MISO, SCK, NSS1]
+    - LORA: [VDD, GND, MOSI, MISO, SCK, NSS]
+
+  - - spi_gps: [1, 2, 3, 4, 5, 6]
+    - MCU: [VDD, GND, MOSI, MISO, SCK, NSS2]
+    - GPS: [VDD, GND, MOSI, MISO, SCK, NSS]
+
+  - - button: [1, 2]
+    - SW: [1, 2]
+    - MCU: [BTN, GND]
+
+  - - led_control: [1, 2]
+    - MCU: [LED, GND]
+    - LED_TORCH: [A, K]

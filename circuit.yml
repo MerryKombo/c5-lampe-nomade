@@ -1,0 +1,32 @@
+connectors:
+  BAT:
+    pinlabels: ["POS", "NEG"]
+    type: Battery
+  SW:
+    pinlabels: ["1", "2"]
+    type: Switch
+  BULB:
+    pinlabels: ["A", "K"]
+    type: LED
+
+cables:
+  simple_circuit:
+    wirecount: 2
+    length: 50
+    gauge: 0.5 mm2
+    color_code: DIN # Standard color coding
+    shield: false
+
+connections:
+  -
+    - BAT: ["POS", "NEG"]
+    - simple_circuit: ["1", "2"]
+    - SW: ["1", "2"]
+  -
+    - SW: ["2", "1"]
+    - simple_circuit: ["1", "2"]
+    - BULB: ["A", "K"]
+  -
+    - BULB: ["K", "A"]
+    - simple_circuit: ["2", "1"]
+    - BAT: ["NEG", "POS"]

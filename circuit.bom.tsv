@@ -1,0 +1,5 @@
+Id	Description	Qty	Unit	Designators
+1	Cable, 2 x 0.5 mm²	50	m	simple_circuit
+2	Connector, Battery, 2 pins	1		BAT
+3	Connector, LED, 2 pins	1		BULB
+4	Connector, Switch, 2 pins	1		SW
