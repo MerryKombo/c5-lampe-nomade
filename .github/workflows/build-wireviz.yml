@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'lampe-wireviz.yml'
+  workflow_dispatch:
 
 jobs:
   build-wireviz:
