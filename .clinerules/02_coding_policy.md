@@ -39,6 +39,33 @@ To ensure high code quality, maintainability, and reliability, this project foll
 - Automated tests must run in Continuous Integration (CI) for every PR (e.g., via GitHub Actions).
 - PRs without adequate test coverage or with failing tests will not be merged.
 
+## Git Workflow Requirements
+
+**IMPORTANT**: For every user request, you MUST:
+
+1. **Categorize the request** by asking the user to classify it as one of:
+   - "new feature" - Adding completely new functionality
+   - "feature improvement" - Enhancing existing functionality 
+   - "bug fix" - Fixing broken or incorrect behavior
+   - "foundation" - Configuration changes, repository setup, or technical debt work
+
+2. **Create a feature branch** based on the classification:
+   - Branch naming: `feature/description-of-change`, `improvement/description-of-change`, `bugfix/description-of-change`, or `foundation/description-of-change`
+   - Always work on the branch, never directly on master
+   - Output the branch name so the user knows which branch to test
+
+3. **Commit all changes** on the feature branch with descriptive commit messages
+
+4. **Wait for user approval** before merging to master
+   - User will test the changes on the feature branch
+   - Once approved, merge the branch and delete it
+   - If rejected, make additional changes on the same branch
+
+5. **Branch and commit output format**: 
+   - Always clearly state "Working on branch: `branch-name`" when making changes
+   - After committing, output the commit hash and message
+   - Format: "Committed on `branch-name`: `commit-hash` - commit message"
+   
 ---
 
 ## Summary
